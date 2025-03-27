@@ -96,7 +96,7 @@
             android:background="@android:color/transparent"
             android:contentDescription="Like"
             android:padding="8dp"
-            android:src="@drawable/ic_likeRed_24" />
+            android:src="@drawable/ic_like_24" />
 
         <TextView
             android:id="@+id/likeCountTextView"
