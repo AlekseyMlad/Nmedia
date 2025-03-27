@@ -3,4 +3,15 @@
     <string name="nmedia">NMedia!</string>
     <string name="description_post_author_avatar" translatable="false">Post author avatar</string>
     <string name="description_post_menu" translatable="false">Post menu</string>
+    <string name="Netology_author" translatable="false"> Нетология - университет интернет-профессий будущего.</string>
+    <string name="Netology_published" translatable="false">21 мая в 18:36</string>
+    <string name="Netology_content" translatable="false">
+Привет, это Нетология.
+Мы начинали с курсов об онлайн-маркетинге
+Затем выросли в университет интернет-профессий: учили дизайнеров, аналитиков, программистов, менеджеров, маркетологов… Но обучать новым профессиям — это не предел. Мы продолжаем расти
+Сегодня мы даём знания не только начинающим, но и тем, кто давно в профессии. Специалисты изучают новые инструменты, топ-менеджеры — получают степень MBA, руководители бизнеса — обучают своих сотрудников и обучаются сами
+Нетология помогает расти на всех этапах карьеры — получать знания на старте и открывать новые высоты.
+</string>
+
+
 </resources>

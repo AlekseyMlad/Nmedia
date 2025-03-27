@@ -10,18 +10,15 @@ import ru.netology.nmedia.dto.Post
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var authorTextView: TextView
-    private lateinit var publishedTextView: TextView
     private lateinit var likeImageView: ImageButton
     private lateinit var likeCountTextView: TextView
     private lateinit var shareImageView: ImageButton
     private lateinit var shareCountTextView: TextView
     private lateinit var viewCountTextView: TextView
-    private lateinit var contentTextView: TextView
 
     private lateinit var post: Post
-    private var shareCount = 980
-    private var viewCount = 550
+    private var shareCount = 9148
+    private var viewCount = 5500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +29,18 @@ class MainActivity : AppCompatActivity() {
         shareImageView = findViewById(R.id.shareImageView)
         shareCountTextView = findViewById(R.id.shareCountTextView)
         viewCountTextView = findViewById(R.id.viewCountTextView)
-        contentTextView = findViewById(R.id.contentTextView)
-        authorTextView = findViewById(R.id.author)
-        publishedTextView = findViewById(R.id.published)
 
         post = Post(
             id = 1,
             author = "Нетология. Университет интернет-профессий будущего",
             published = "21 мая в 18:36",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-            like = 999,
+            like = 1099,
             likedByMi = false
         )
 
-        updatePostInfo()
         updateLikeButton()
         updateCounts()
-        updateContent()
 
         likeImageView.setOnClickListener {
             post.likedByMi = !post.likedByMi
@@ -67,11 +59,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updatePostInfo() {
-        authorTextView.text = post.author
-        publishedTextView.text = post.published
-
-    }
 
     private fun updateLikeButton() {
         likeImageView.setImageResource(if (post.likedByMi) R.drawable.ic_like_red_24 else R.drawable.ic_like_24)
@@ -83,10 +70,6 @@ class MainActivity : AppCompatActivity() {
         viewCountTextView.text = formatCount(viewCount)
     }
 
-    private fun updateContent() {
-        contentTextView.text = post.content
-
-    }
 
     private fun formatCount(count: Int): String {
         return when {
