@@ -1,21 +1,15 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.TextView
+import ru.netology.nmedia.databinding.ActivityMainBinding
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.dto.Post
-
+import android.content.Context
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var likeImageView: ImageButton
-    private lateinit var likeCountTextView: TextView
-    private lateinit var shareImageView: ImageButton
-    private lateinit var shareCountTextView: TextView
-    private lateinit var viewCountTextView: TextView
-
+private lateinit var binding: ActivityMainBinding
     private lateinit var post: Post
     private var shareCount = 9148
     private var viewCount = 5500
@@ -23,12 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        likeImageView = findViewById(R.id.likeImageView)
-        likeCountTextView = findViewById(R.id.likeCountTextView)
-        shareImageView = findViewById(R.id.shareImageView)
-        shareCountTextView = findViewById(R.id.shareCountTextView)
-        viewCountTextView = findViewById(R.id.viewCountTextView)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         post = Post(
             id = 1,
@@ -42,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         updateLikeButton()
         updateCounts()
 
-        likeImageView.setOnClickListener {
+        binding.likeImageView.setOnClickListener {
             post.likedByMi = !post.likedByMi
             if (post.likedByMi) {
                 post.like++
@@ -53,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             updateCounts()
         }
 
-        shareImageView.setOnClickListener {
+        binding.shareImageView.setOnClickListener {
             shareCount++
             updateCounts()
         }
@@ -61,22 +51,20 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateLikeButton() {
-        likeImageView.setImageResource(if (post.likedByMi) R.drawable.ic_like_red_24 else R.drawable.ic_like_24)
+        binding.likeImageView.setImageResource(if (post.likedByMi) R.drawable.ic_like_red_24 else R.drawable.ic_like_24)
     }
 
     private fun updateCounts() {
-        likeCountTextView.text = formatCount(post.like)
-        shareCountTextView.text = formatCount(shareCount)
-        viewCountTextView.text = formatCount(viewCount)
+        binding.likeCountTextView.text = formatCount(post.like, this)
+        binding.shareCountTextView.text = formatCount(shareCount, this)
+        binding.viewCountTextView.text = formatCount(viewCount, this)
     }
 
 
-    private fun formatCount(count: Int): String {
+    private fun formatCount(count: Int, context: Context): String {
         return when {
-            count >= 1000000 -> String.format("%.1fM", count.toDouble() / 1000000)
-            count >= 10000 -> String.format("%dK", count / 1000)
-            count >= 1100 -> String.format("%.1fK", count.toDouble() / 1000)
-            count >= 1000 -> "1K"
+            count >= 1000000 -> String.format(context.getString(R.string.format_million), count.toDouble() / 1000000)
+            count >= 1000 -> String.format(context.getString(R.string.format_thousand), count.toDouble() / 1000)
             else -> count.toString()
         }
     }
