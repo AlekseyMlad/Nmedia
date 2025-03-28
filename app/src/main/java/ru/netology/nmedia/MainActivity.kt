@@ -9,7 +9,7 @@ import android.content.Context
 
 class MainActivity : AppCompatActivity() {
 
-private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var post: Post
     private var shareCount = 9148
     private var viewCount = 5500
@@ -20,6 +20,10 @@ private lateinit var binding: ActivityMainBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        val author = getString(R.string.Netology_author)
+//        val published = getString(R.string.Netology_published)
+//        val content = getString(R.string.Netology_content)
+
         post = Post(
             id = 1,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -29,6 +33,10 @@ private lateinit var binding: ActivityMainBinding
             likedByMi = false
         )
 
+        binding.author.text = post.author
+        binding.published.text = post.published
+        binding.contentTextView.text = post.content
+        
         updateLikeButton()
         updateCounts()
 
@@ -51,7 +59,7 @@ private lateinit var binding: ActivityMainBinding
 
 
     private fun updateLikeButton() {
-        binding.likeImageView.setImageResource(if (post.likedByMi) R.drawable.ic_like_red_24 else R.drawable.ic_like_24)
+        binding.likeImageView.setImageResource(if (post.likedByMi) R.drawable.ic_likes_red else R.drawable.ic_likes)
     }
 
     private fun updateCounts() {
