@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp"
     tools:context=".MainActivity">
-
 
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/description_post_author_avatar"
-        app:layout_constraintBottom_toBottomOf="@id/barrierTop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/netology" />
-
 
     <TextView
         android:id="@+id/author"
@@ -27,22 +23,22 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:singleLine="true"
+        android:text="@string/Netology_author"
         app:layout_constraintBottom_toTopOf="@id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:text="@string/Netology_author" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/published"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:text="@string/Netology_published"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintStart_toEndOf="@id/avatar"
-        app:layout_constraintTop_toBottomOf="@id/author"
-        android:text="@string/Netology_published" />
+        app:layout_constraintTop_toBottomOf="@id/author" />
 
     <ImageButton
         android:id="@+id/menu"
@@ -50,10 +46,10 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:contentDescription="@string/description_post_menu"
-        android:src="@drawable/more_vert_24"
-        app:layout_constraintBottom_toTopOf="@+id/content"
+        android:src="@drawable/ic_more_vert"
+        app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/avatar" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierTop"
@@ -64,11 +60,14 @@
 
     <TextView
         android:id="@+id/contentTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/barrierTop"
-        android:text="@string/Netology_content" />
+        android:text="@string/Netology_content"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrierTop" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierBottom"
@@ -77,74 +76,69 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="contentTextView" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <ImageButton
+        android:id="@+id/likeImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_like"
+        android:padding="8dp"
+        android:src="@drawable/ic_likes"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contentTextView">
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
-        <ImageButton
-            android:id="@+id/likeImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Like"
-            android:padding="8dp"
-            android:src="@drawable/ic_like_24" />
+    <TextView
+        android:id="@+id/likeCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Like"
+        app:layout_constraintStart_toEndOf="@+id/likeImageView"
+        app:layout_constraintTop_toTopOf="@+id/likeImageView"
+        app:layout_constraintBottom_toBottomOf="@+id/likeImageView"/>
 
-        <TextView
-            android:id="@+id/likeCountTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Лайки" />
+    <ImageButton
+        android:id="@+id/shareImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/description_share"
+        android:padding="8dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toBottomOf="@+id/likeImageView"
+        app:layout_constraintStart_toEndOf="@+id/likeCountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
-        <ImageButton
-            android:id="@+id/shareImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Share"
-            android:padding="8dp"
-            android:src="@drawable/ic_share" />
+    <TextView
+        android:id="@+id/shareCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Share"
+        app:layout_constraintBottom_toBottomOf="@+id/shareImageView"
+        app:layout_constraintStart_toEndOf="@+id/shareImageView"
+        app:layout_constraintTop_toTopOf="@+id/likeImageView" />
 
-        <TextView
-            android:id="@+id/shareCountTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Поделись" />
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/viewIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/description_view_count"
+        android:src="@drawable/ic_view"
+        app:layout_constraintBottom_toBottomOf="@+id/shareImageView"
+        app:layout_constraintEnd_toStartOf="@+id/viewCountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/viewCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="355dp"
         android:padding="8dp"
         android:text="0"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
-
-    <ImageView
-        android:id="@+id/view"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toStartOf="@+id/viewCountTextView"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-
-        app:srcCompat="@drawable/eye" />
-
+        app:layout_constraintBottom_toBottomOf="@+id/viewIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
