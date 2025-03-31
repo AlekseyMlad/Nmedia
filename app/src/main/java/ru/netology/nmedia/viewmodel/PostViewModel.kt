@@ -1,20 +1,19 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
 
-class PostViewModel: ViewModel() {
+class PostViewModel : ViewModel() {
 
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
-    val data = repository.get()
+    val data = repository.getAll()
 
-    fun like() = repository.like()
-    fun share() = repository.share()
-    fun view() = repository.view()
+    fun likeById(id: Long) = repository.likeById(id)
+    fun shareById(id: Long) = repository.shareById(id)
+    fun viewById(id: Long) = repository.viewById(id)
 
-    fun formatCount(count: Int, context: Context): String {
+    fun formatCount(count: Int): String {
         return when {
             count >= 1_000_000 -> {
                 val million = count / 100_000
@@ -30,4 +29,5 @@ class PostViewModel: ViewModel() {
             else -> count.toString()
         }
     }
+
 }
