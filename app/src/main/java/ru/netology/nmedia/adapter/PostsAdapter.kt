@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.viewmodel.PostViewModel
+import ru.netology.nmedia.utils.formatCount
 
 typealias OnLikeListener = (Post) -> Unit
 typealias OnShareListener = (Post) -> Unit
@@ -17,13 +17,12 @@ typealias OnViewListener = (Post) -> Unit
 
 class PostsAdapter(private val onLikeListener: OnLikeListener,
                    private val onShareListener: OnShareListener,
-                   private val onViewListener: OnViewListener,
-                   private val viewModel: PostViewModel
+                   private val onViewListener: OnViewListener
     ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
             val view = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return PostViewHolder(view, onLikeListener, onShareListener, onViewListener, viewModel)
+            return PostViewHolder(view, onLikeListener, onShareListener, onViewListener)
         }
 
         override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -37,8 +36,7 @@ class PostsAdapter(private val onLikeListener: OnLikeListener,
 class PostViewHolder(private val binding: CardPostBinding,
                      private val onLikeListener: OnLikeListener,
                      private val onShareListener: OnShareListener,
-                     private val onViewListener: OnViewListener,
-                     private val viewModel: PostViewModel
+                     private val onViewListener: OnViewListener
     ) : RecyclerView.ViewHolder(binding.root){
     fun bind(post: Post) = with(binding) {
         author.text = post.author
@@ -47,9 +45,9 @@ class PostViewHolder(private val binding: CardPostBinding,
         likeImageView.setImageResource(
             if (post.likedByMi) R.drawable.ic_likes_red else R.drawable.ic_likes
         )
-        likeCountTextView.text = viewModel.formatCount(post.likes)
-        shareCountTextView.text = viewModel.formatCount(post.shares)
-        viewCountTextView.text = viewModel.formatCount(post.views)
+        likeCountTextView.text = post.likes.formatCount()
+        shareCountTextView.text = post.shares.formatCount()
+        viewCountTextView.text = post.views.formatCount()
 
         likeImageView.setOnClickListener{
             onLikeListener(post)
