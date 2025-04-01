@@ -24,8 +24,7 @@ class MainActivity : AppCompatActivity() {
             },
             { post ->
                 viewModel.viewById(post.id)
-            },
-            viewModel
+            }
         )
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
