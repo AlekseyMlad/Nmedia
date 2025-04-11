@@ -8,6 +8,8 @@
     android:padding="16dp"
     tools:context=".activity.MainActivity">
 
+
+
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="48dp"
@@ -40,13 +42,15 @@
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toBottomOf="@id/author" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@android:color/transparent"
+        style="@style/App.Widget.MenuButton"
         android:contentDescription="@string/description_post_menu"
-        android:src="@drawable/ic_more_vert"
+        app:icon="@drawable/ic_more_vert"
+        app:iconTint="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/avatar" />
@@ -77,70 +81,49 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="contentTextView" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/likeImageView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        style="@style/App.Widget.LikeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:checkable="true"
         android:contentDescription="@string/description_like"
         android:padding="8dp"
-        android:src="@drawable/ic_likes"
+        app:icon="@drawable/ic_like_selector"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
-    <TextView
-        android:id="@+id/likeCountTextView"
-        android:layout_width="50dp"
-        android:layout_height="48dp"
-        android:padding="8dp"
-        android:text="Like"
-        app:layout_constraintStart_toEndOf="@+id/likeImageView"
-        app:layout_constraintTop_toTopOf="@+id/likeImageView"
-        app:layout_constraintBottom_toBottomOf="@+id/likeImageView"/>
 
-    <ImageButton
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/shareImageView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/description_share"
+        style="@style/App.Widget.ShareButton"
         android:padding="8dp"
-        android:src="@drawable/ic_share"
+        app:iconTint="?attr/colorControlNormal"
+        app:icon="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="@+id/likeImageView"
-        app:layout_constraintStart_toEndOf="@+id/likeCountTextView"
+        app:layout_constraintStart_toEndOf="@+id/likeImageView"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
-    <TextView
-        android:id="@+id/shareCountTextView"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/viewIcon"
+        style="@style/App.Widget.ViewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Share"
-        app:layout_constraintBottom_toBottomOf="@+id/shareImageView"
-        app:layout_constraintStart_toEndOf="@+id/shareImageView"
-        app:layout_constraintTop_toTopOf="@+id/likeImageView" />
-
-
-    <ImageView
-        android:id="@+id/viewIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/description_view_count"
-        android:src="@drawable/ic_view"
+        app:icon="@drawable/ic_view"
+        app:iconTint="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="@+id/shareImageView"
-        app:layout_constraintEnd_toStartOf="@+id/viewCountTextView"
-        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/viewCountTextView"
-        android:layout_width="50dp"
-        android:layout_height="48dp"
-        android:padding="8dp"
-        android:text="View"
-        app:layout_constraintBottom_toBottomOf="@+id/viewIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

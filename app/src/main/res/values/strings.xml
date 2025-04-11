@@ -15,7 +15,15 @@
     <string name="format_thousand" translatable="false">%.1fK</string>
     <string name="description_like" translatable="false">Like</string>
     <string name="description_share" translatable="false">Share</string>
+    <string name="description_post_save" translatable="false">Save</string>
+    <string name="post_text" translatable="false">Post text</string>
     <string name="description_view_count" translatable="false">View Count</string>
+    <string name="menu_remove">Remove</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_added">Added</string>
+    <string name="edit_heading">Нетология</string>
+    <string name="edit_message">Edit Message</string>
+    <string name="error_empty_content" translatable="false">Content can`t be empty</string>
 
 
 </resources>
