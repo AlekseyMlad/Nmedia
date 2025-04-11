@@ -46,12 +46,12 @@ class PostViewHolder(
         author.text = post.author
         published.text = post.published
         contentTextView.text = post.content
-        likeImageView.setImageResource(
-            if (post.likedByMi) R.drawable.ic_likes_red else R.drawable.ic_likes
-        )
-        likeCountTextView.text = post.likes.formatCount()
-        shareCountTextView.text = post.shares.formatCount()
-        viewCountTextView.text = post.views.formatCount()
+        likeImageView.apply {
+            isChecked = post.likedByMi
+            text = post.likes.formatCount()
+        }
+        shareImageView.text = post.shares.formatCount()
+        viewIcon.text = post.views.formatCount()
 
         likeImageView.setOnClickListener {
             onInteractionListener.onLike(post)
