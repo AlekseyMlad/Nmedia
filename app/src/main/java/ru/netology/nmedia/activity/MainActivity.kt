@@ -1,8 +1,7 @@
 package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
@@ -12,20 +11,34 @@ import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.viewmodel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.utils.AndroidUtils
-
 
 
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: PostViewModel by viewModels()
-    private var editedPostId: Long = 0
+
+    private val newPostLauncher =
+        registerForActivityResult(NewPostResultContract) { result ->
+            if (result == null) {
+                return@registerForActivityResult
+            }
+            if (result.id == 0L) {
+
+                viewModel.changeContentAndSave(result.content)
+            } else {
+                val postToEdit = viewModel.data.value?.find { it.id == result.id }
+                if (postToEdit != null) {
+
+                    viewModel.edit(postToEdit.copy(content = result.content))
+                    viewModel.changeContentAndSave(result.content)
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
@@ -38,14 +51,24 @@ class MainActivity : AppCompatActivity() {
 
             override fun onShare(post: Post) {
                 viewModel.shareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+                val sharedIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(sharedIntent)
             }
 
             override fun onEdit(post: Post) {
-                editedPostId = post.id
-                viewModel.edit(post)
+                val intent = Intent(this@MainActivity, NewPostActivity::class.java).apply {
+                    putExtra("post_id", post.id)
+                    putExtra("post_content", post.content)
+                }
+                newPostLauncher.launch(intent)
             }
-
         })
+
         binding.list.adapter = adapter
         binding.list.layoutManager = LinearLayoutManager(this)
 
@@ -58,41 +81,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.edited.observe(this) { post ->
-            if (post.id != 0L) {
-
-                binding.content.setText(post.content)
-                binding.content.requestFocus()
-
-                binding.editGroup.visibility = View.VISIBLE
-            } else {
-                binding.content.setText("")
-                binding.content.clearFocus()
-
-                binding.editGroup.visibility = View.GONE
-
-            }
+        binding.fab.setOnClickListener{
+            newPostLauncher.launch(intent)
         }
-
-        binding.add.setOnClickListener {
-            val text = binding.content.text.toString()
-            if (text.isBlank()) {
-                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
-            viewModel.changeContentAndSave(text)
-
-            binding.content.setText("")
-            binding.content.clearFocus()
-            AndroidUtils.hideKeyboard(it)
-        }
-
-        binding.editCancel.setOnClickListener {
-            viewModel.cancelEdit()
-        }
-
-
     }
-
 }

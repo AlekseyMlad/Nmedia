@@ -1,6 +1,5 @@
 package ru.netology.nmedia.viewmodel
 
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.dto.Post
@@ -29,17 +28,13 @@ class PostViewModel : ViewModel() {
         edited.value = post
     }
 
-    fun cancelEdit() {
-        edited.value = empty
-    }
-
-    fun changeContentAndSave(text: String){
+    fun changeContentAndSave(content: String){
+        val text = content.trim()
         edited.value?.let {
-            if (it.content != text) {
-                repository.save(it.copy(content = text))
-            }
+            repository.save(it.copy(content = text))
         }
         edited.value = empty
     }
+
 
 }

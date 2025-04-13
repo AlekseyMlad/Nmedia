@@ -74,6 +74,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierTop" />
 
+
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierBottom"
         android:layout_width="wrap_content"
@@ -92,7 +94,8 @@
         android:padding="8dp"
         app:icon="@drawable/ic_like_selector"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
+        app:layout_constraintTop_toTopOf="@id/barrierBottom"/>
 
 
 
@@ -109,7 +112,7 @@
         app:icon="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="@+id/likeImageView"
         app:layout_constraintStart_toEndOf="@+id/likeImageView"
-        app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
+        app:layout_constraintTop_toTopOf="@id/barrierBottom" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -123,7 +126,41 @@
         app:iconTint="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="@+id/shareImageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/barrierBottom" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/video_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"/>
+
+    <ImageView
+        android:id="@+id/video_preview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_video_preview"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_video_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
+    <ImageView
+        android:id="@+id/video_play"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/play_video"
+        android:src="@drawable/ic_play"
+        app:layout_constraintBottom_toBottomOf="@+id/video_preview"
+        app:layout_constraintEnd_toEndOf="@+id/video_preview"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/video_preview"
+        app:layout_constraintTop_toTopOf="@+id/video_preview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
