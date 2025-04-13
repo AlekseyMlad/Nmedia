@@ -1,6 +1,9 @@
 package ru.netology.nmedia.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -33,12 +36,25 @@ class PostsAdapter(
         val post = getItem(position)
         holder.bind(post)
         holder.itemView.tag = post.id
+        if (post.video != null) {
+            holder.binding.videoPreview.visibility = View.VISIBLE
+            holder.binding.videoPlay.visibility = View.VISIBLE
+            holder.binding.videoPlay.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                holder.itemView.context.startActivity(intent)
+            }
+        } else {
+            holder.binding.videoPreview.visibility = View.GONE
+            holder.binding.videoPlay.visibility = View.GONE
+            holder.binding.videoPlay.setOnClickListener(null)
+        }
+
     }
 }
 
 
 class PostViewHolder(
-    private val binding: CardPostBinding,
+    val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
 

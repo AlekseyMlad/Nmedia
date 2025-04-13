@@ -52,11 +52,13 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "20 июля в 10:28",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по" +
             " онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и " +
-            "управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных",
+            "управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных" +
+            " -> https://youtu.be/BT38K6NqETE?si=lAbr5ohe9ehM0VAU",
             likedByMi = false,
             likes = 1199990,
             shares = 40099,
-            views = 9099
+            views = 9099,
+            video = "https://youtu.be/BT38K6NqETE?si=lAbr5ohe9ehM0VAU"
         )
     ).reversed()
 
@@ -90,7 +92,13 @@ class PostRepositoryInMemoryImpl : PostRepository {
         posts = if (post.id == 0L){
             listOf(post.copy(id = nextId++, author = "Me")) + posts
         }else{
-            posts.map { if (it.id != post.id) it else it.copy(content = post.content) }
+            posts.map {
+                if (it.id == post.id) {
+                    post
+                } else {
+                    it
+                }
+            }
         }
         data.value = posts
     }

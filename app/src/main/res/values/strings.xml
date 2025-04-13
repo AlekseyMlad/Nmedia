@@ -24,6 +24,10 @@
     <string name="edit_heading">Нетология</string>
     <string name="edit_message">Edit Message</string>
     <string name="error_empty_content" translatable="false">Content can`t be empty</string>
+    <string name="chooser_share_post">Share</string>
+    <string name="video_preview" translatable="false">Video preview</string>
+    <string name="play_video" translatable="false">Play video</string>
+    <string name="content_description_video_preview" translatable="false">Preview of the video</string>
 
 
 </resources>

@@ -7,4 +7,5 @@
     <string name="menu_added">Добавить</string>
     <string name="edit_heading">Нетология</string>
     <string name="edit_message">Сообщение</string>
+    <string name="chooser_share_post">Поделись</string>
 </resources>
