@@ -20,6 +20,7 @@ interface OnInteractionListener {
     fun onRemove(post: Post)
     fun onShare(post: Post)
     fun onEdit(post: Post)
+    fun onPostClick(post: Post)
 }
 
 
@@ -36,11 +37,11 @@ class PostsAdapter(
         val post = getItem(position)
         holder.bind(post)
         holder.itemView.tag = post.id
-        if (post.video != null) {
+        if (post.videoUrl != null) {     //видео если есть
             holder.binding.videoPreview.visibility = View.VISIBLE
             holder.binding.videoPlay.visibility = View.VISIBLE
             holder.binding.videoPlay.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
                 holder.itemView.context.startActivity(intent)
             }
         } else {
@@ -86,14 +87,19 @@ class PostViewHolder(
                             onInteractionListener.onRemove(post)
                             true
                         }
+
                         R.id.edit -> {
                             onInteractionListener.onEdit(post)
                             true
                         }
+
                         else -> false
                     }
                 }
             }.show()
+        }
+        root.setOnClickListener {
+            onInteractionListener.onPostClick(post)
         }
     }
 }
