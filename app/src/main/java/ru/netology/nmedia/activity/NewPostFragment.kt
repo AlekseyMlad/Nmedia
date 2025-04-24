@@ -23,19 +23,20 @@ class NewPostFragment : Fragment() {
 
         binding.content.requestFocus()
 
-//        arguments?.textArg?.let {
-//            binding.content.setText(it)
-//        }
 
         arguments?.textArg?.let (binding.content::setText)
+
+
 
         binding.add.setOnClickListener {
             if (binding.content.text.isNotBlank()) {
                 val content = binding.content.text.toString()
-                viewModel.changeContentAndSave(content)
+                viewModel.changeContent(content)
+                viewModel.save()
             }
             findNavController().navigateUp()
         }
+
         return binding.root
     }
 
