@@ -64,7 +64,7 @@ class PostViewHolder(
         published.text = post.published
         contentTextView.text = post.content
         likeImageView.apply {
-            isChecked = post.likedByMi
+            isChecked = post.likedByMe
             text = post.likes.formatCount()
         }
         shareImageView.text = post.shares.formatCount()
