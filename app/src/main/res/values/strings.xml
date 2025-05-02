@@ -28,6 +28,16 @@
     <string name="video_preview" translatable="false">Video preview</string>
     <string name="play_video" translatable="false">Play video</string>
     <string name="content_description_video_preview" translatable="false">Preview of the video</string>
+    <string name="channel_remote_name" translatable="false">Server notification</string>
+    <string name="channel_remote_description" translatable="false">Notification from remote server</string>
+    <string name="hello" translatable="false">Hello World!</string>
+    <string name="add_post" translatable="false">Add post</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="google_play_unavailable" translatable="false">Google Api Unavailable</string>
+    <string name="notification_user_liked" translatable="false">User %1$s liked %2$s\'s post</string>
+    <string name="Add_new_post" translatable="false">Add new post</string>
+    <string name="new_post_from">%s posted a new post:</string>
+
 
 
 </resources>
